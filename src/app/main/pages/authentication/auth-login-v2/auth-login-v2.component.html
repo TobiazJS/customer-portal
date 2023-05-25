@@ -1,113 +1,219 @@
-<div class="auth-wrapper auth-v2">
+<div class="auth-wrapper auth-v2" style="background-color: white !important">
   <div class="auth-inner row m-0">
-    <!-- Brand logo--><a class="brand-logo" href="javascript:void(0);">
+    <!-- Brand logo-->
+    <!-- <a class="brand-logo" href="javascript:void(0);">
       <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" height="28" />
       <h2 class="brand-text text-primary ml-1">Vuexy</h2></a
-    >
+    > -->
     <!-- /Brand logo-->
     <!-- Left Text-->
-    <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-      <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
+    <div
+      class="d-none d-lg-flex col-lg-8 align-items-center p-5"
+      style="background-color: white !important"
+    >
+      <div
+        class="w-100 d-lg-flex align-items-center justify-content-center px-5 rounded-xl"
+        style="
+          min-height: 100vh;
+          background-color: #f8f7fa;
+          border-radius: 24px;
+        "
+      >
         <img
           class="img-fluid"
-          [src]="
-            coreConfig.layout.skin === 'dark'
-              ? 'assets/images/pages/login-v2-dark.svg'
-              : 'assets/images/pages/login-v2.svg'
-          "
+          src="assets/images/login/login-image.svg"
           alt="Login V2"
+          style="
+            max-width: 688px !important;
+            max-height: 559px !important;
+            object-fit: cover !important;
+          "
         />
       </div>
     </div>
     <!-- /Left Text-->
     <!-- Login-->
-    <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
-      <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-        <h2 class="card-title font-weight-bold mb-1">Welcome to Vuexy! 👋</h2>
-        <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
+    <div class="d-flex flex-column col-lg-4 px-0">
+      <!-- mobile -->
+      <div
+        class="p-4 d-lg-none"
+        style="
+          width: 100%;
+          background: white;
+          box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.08);
+          border-radius: 0px 0px 24px 24px;
+          position: fixed !important;
+          z-index: 10000 !important;
+          display: flex !important;
+          align-items: center;
+        "
+      >
+        <i
+          class="feather icon-home"
+          (click)="togglePasswordTextType()"
+          style="font-size: 20px; font-weight: 700 !important; color: #2b2b2b"
+        ></i>
+        <h2
+          class="m-0"
+          style="
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            text-align: center;
+            justify-content: center;
+            width: 100% !important;
+            color: #2b2b2b;
+          "
+        >
+          {{ "LOGIN.LOGIN" | translate }}
+        </h2>
+      </div>
+      <!-- mobile -->
 
-        <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
-          <div class="alert-body">
-            <p>{{ error }}</p>
-          </div>
-        </ngb-alert>
-
-        <form class="auth-login-form mt-2" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <div class="form-group">
-            <label class="form-label" for="login-email">Email</label>
-            <input
-              type="text"
-              formControlName="email"
-              class="form-control"
-              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
-              placeholder="admin@demo.com"
-              aria-describedby="login-email"
-              autofocus=""
-              tabindex="1"
+      <h2
+        class="card-title font-weight-bold px-2 mb-1 px-xl-2 d-none d-lg-block mt-5"
+        style="
+          color: #2b2b2b;
+          font-weight: 700 !important;
+          font-size: 24px;
+          line-height: 29px;
+          display: flex !important;
+          align-items: center !important;
+          gap: 22px;
+        "
+      >
+        <i
+          class="feather icon-home"
+          (click)="togglePasswordTextType()"
+          style="font-size: 20px; font-weight: 700 !important"
+        ></i>
+        {{ "LOGIN.LOGIN" | translate }}
+      </h2>
+      <div class="d-flex align-items-center auth-bg" style="height: 100%">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+          <p
+            class="mt-4 mb-4 d-lg-none"
+            style="font-weight: 400; font-size: 16px; line-height: 19px"
+          >
+            {{ "LOGIN.DESC" | translate }}
+          </p>
+          <div
+            class="p-3 d-flex align-items-center rounded-lg"
+            style="background-color: #f9f9f9"
+          >
+            <img
+              src="assets/images/login/login-image-small.svg"
+              style="width: 56px"
             />
-            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-              <div *ngIf="f.email.errors.required">Email is required</div>
-              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-            </div>
+            <span
+              class="ml-4"
+              style="
+                font-weight: 400;
+                font-size: 24px;
+                line-height: 29px;
+                color: #2b2b2b;
+              "
+              >Avrist Individu</span
+            >
           </div>
-          <div class="form-group">
-            <div class="d-flex justify-content-between">
-              <label for="login-password">Password</label
-              ><a routerLink="/pages/authentication/forgot-password-v2"><small>Forgot Password?</small></a>
+          <p
+            class="mt-4 mb-0 d-none d-lg-block"
+            style="font-weight: 400; font-size: 16px; line-height: 19px"
+          >
+            {{ "LOGIN.DESC" | translate }}
+          </p>
+
+          <ngb-alert [type]="'danger'" [dismissible]="false" *ngIf="error">
+            <div class="alert-body">
+              <p>{{ error }}</p>
             </div>
-            <div class="input-group input-group-merge form-password-toggle">
+          </ngb-alert>
+
+          <form
+            class="auth-login-form mt-8"
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <div class="form-group">
               <input
-                [type]="passwordTextType ? 'text' : 'password'"
-                formControlName="password"
-                class="form-control form-control-merge"
-                [ngClass]="{ 'is-invalid error': submitted && f.password.errors }"
-                placeholder="············"
-                aria-describedby="login-password"
-                tabindex="2"
+                type="text"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                placeholder="admin@demo.com"
+                aria-describedby="login-email"
+                autofocus=""
+                tabindex="1"
               />
-              <div class="input-group-append">
-                <span class="input-group-text cursor-pointer"
-                  ><i
-                    class="feather font-small-4"
-                    [ngClass]="{
-                      'icon-eye-off': passwordTextType,
-                      'icon-eye': !passwordTextType
-                    }"
-                    (click)="togglePasswordTextType()"
-                  ></i
-                ></span>
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">
+                  Email must be a valid email address
+                </div>
               </div>
             </div>
-            <div
-              *ngIf="submitted && f.password.errors"
-              class="invalid-feedback"
-              [ngClass]="{ 'd-block': submitted && f.password.errors }"
+            <div class="form-group">
+              <div class="input-group input-group-merge form-password-toggle">
+                <input
+                  [type]="passwordTextType ? 'text' : 'password'"
+                  formControlName="password"
+                  class="form-control form-control-merge"
+                  [ngClass]="{
+                    'is-invalid error': submitted && f.password.errors
+                  }"
+                  placeholder="············"
+                  aria-describedby="login-password"
+                  tabindex="2"
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text cursor-pointer"
+                    ><i
+                      class="feather font-small-4"
+                      [ngClass]="{
+                        'icon-eye-off': passwordTextType,
+                        'icon-eye': !passwordTextType
+                      }"
+                      (click)="togglePasswordTextType()"
+                    ></i
+                  ></span>
+                </div>
+              </div>
+              <div
+                *ngIf="submitted && f.password.errors"
+                class="invalid-feedback"
+                [ngClass]="{ 'd-block': submitted && f.password.errors }"
+              >
+                <div *ngIf="f.password.errors.required">
+                  Password is required
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <a
+                routerLink="/pages/authentication/forgot-password-v2"
+                style="font-weight: 400; font-size: 16px; line-height: 19px"
+                >{{ "LOGIN.FORGOT_PASSWORD" | translate }}</a
+              >
+            </div>
+            <button
+              [disabled]="loading"
+              class="btn btn-primary btn-block mt-7 py-4"
+              tabindex="4"
+              rippleEffect
             >
-              <div *ngIf="f.password.errors.required">Password is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="custom-control custom-checkbox">
-              <input class="custom-control-input" id="remember-me" type="checkbox" tabindex="3" />
-              <label class="custom-control-label" for="remember-me"> Remember Me</label>
-            </div>
-          </div>
-          <button [disabled]="loading" class="btn btn-primary btn-block" tabindex="4" rippleEffect>
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Sign in
-          </button>
-        </form>
-        <p class="text-center mt-2">
-          <span>New on our platform?</span
-          ><a routerLink="/pages/authentication/register-v2"><span>&nbsp;Create an account</span></a>
-        </p>
-        <div class="divider my-2">
-          <div class="divider-text">or</div>
-        </div>
-        <div class="auth-footer-btn d-flex justify-content-center">
-          <a class="btn btn-facebook" href="javascript:void(0)"><i data-feather="facebook"></i></a
-          ><a class="btn btn-twitter white" href="javascript:void(0)"><i data-feather="twitter"></i></a
-          ><a class="btn btn-google" href="javascript:void(0)"><i data-feather="mail"></i></a
-          ><a class="btn btn-github" href="javascript:void(0)"><i data-feather="github"></i></a>
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span
+              >{{ "LOGIN.LOGIN" | translate }}
+            </button>
+          </form>
+          <p class="text-center mt-7">
+            <span>{{ "LOGIN.REGISTER_TEXT" | translate }}</span
+            ><a routerLink="/pages/authentication/register-v2"
+              ><span>&nbsp;{{ "LOGIN.REGISTER" | translate }}</span></a
+            >
+          </p>
         </div>
       </div>
     </div>
